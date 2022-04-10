@@ -71,7 +71,7 @@ next
     bne next
     jmp *
 msg
-    .text "HELLO, WORLD!"
+    .screen "HELLO, WORLD!"
 `;
     editor.setValue(prog);
 }

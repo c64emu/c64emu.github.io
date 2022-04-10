@@ -1,6 +1,8 @@
 import * as editor from './editor';
-import { ASM_MOS6502 } from 'c64asm/src/asm';
+import * as c64asm from 'c64asm/src';
 import * as c64emu from 'c64emu/src';
+
+let assembleResult: c64asm.AssembleResult = null;
 
 export function init(): void {
     const monitor = <HTMLCanvasElement>(
@@ -14,20 +16,65 @@ export function init(): void {
 export function assemble(): boolean {
     const outputDiv = document.getElementById('asm-output');
     const src = editor.getText();
-    const assembler = new ASM_MOS6502();
-    if (assembler.assemble(src)) {
-        const mc = assembler.getMachineCode().toString({
-            matchSourceCode: true,
-            includeAddress: true,
-            maxBytesPerRow: 8,
-            includeSourceCode: true,
-        });
-        outputDiv.innerHTML = mc.replace(/\n/g, '<br/>');
-        return true;
-    } else {
+    assembleResult = c64asm.assemble6502(src);
+    if (assembleResult.error) {
         outputDiv.innerHTML =
             'assemble failed. Error:' +
-            assembler.getErrorString().replace(/\n/g, '<br/>');
-        return;
+            assembleResult.errorString.replace(/\n/g, '<br/>');
+        return false;
+    } else {
+        outputDiv.innerHTML = assembleResult.stringifiedCode.replace(
+            /\n/g,
+            '<br/>',
+        );
+        return true;
     }
+}
+
+export function run(): boolean {
+    if (assembleResult == null || assembleResult.error) {
+        // TODO
+        alert('!!!!!');
+        return false;
+    }
+    c64emu.setMemory(
+        assembleResult.machineCodeAddress,
+        assembleResult.machineCode,
+    );
+    c64emu.startDebugging(assembleResult.machineCodeAddress);
+    updateRegisters();
+    return true;
+}
+
+export function step(): void {
+    if (assembleResult == null) return;
+    c64emu.step();
+    updateRegisters();
+    c64emu.render();
+}
+
+function updateRegisters(): void {
+    const registers = c64emu.getRegisters();
+    const registersString =
+        'pc=' +
+        registers['pc'].toString(16).toUpperCase() +
+        ' (' +
+        registers['pc'] +
+        ')' +
+        ', a=' +
+        registers['a'].toString(16).toUpperCase() +
+        ' (' +
+        registers['a'] +
+        ')' +
+        ', x=' +
+        registers['x'].toString(16).toUpperCase() +
+        ' (' +
+        registers['x'] +
+        ')' +
+        ', y=' +
+        registers['y'].toString(16).toUpperCase() +
+        ' (' +
+        registers['y'] +
+        ')';
+    document.getElementById('registers').innerHTML = registersString;
 }

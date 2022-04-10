@@ -85,7 +85,7 @@
             </button>
             <button
                 class="button-success pure-button"
-                onclick="alert('unimplemented');"
+                onclick="c64emuGitHubIo.run();"
             >
                 Run
             </button>
@@ -101,7 +101,15 @@
         </div>
 
         <h2>Emulator</h2>
-
+        <div style="margin-top: 2px">
+            <button
+                class="button-success pure-button"
+                onclick="c64emuGitHubIo.step();"
+            >
+                step
+            </button>
+        </div>
+        <p id="registers">pc=?</p>
         <canvas
             id="c64monitor_canvas"
             width="400"
