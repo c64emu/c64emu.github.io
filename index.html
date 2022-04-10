@@ -17,20 +17,18 @@
         />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <!-- css -->
-        <link rel="stylesheet" href="node_modules/purecss/build/pure-min.css" />
-        <link
-            rel="stylesheet"
-            href="node_modules/purecss/build/grids-responsive-min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="node_modules/codemirror/lib/codemirror.css"
-        />
+        <link rel="stylesheet" href="css/pure-min.css" />
+        <link rel="stylesheet" href="css/grids-responsive-min.css" />
+        <link rel="stylesheet" href="css/codemirror.css" />
         <!-- include js -->
-        <script src="dist/c64emu.github.io.min.js?version=1?>"></script>
+        <script src="js/c64emu.github.io.min.js?version=1?>"></script>
 
         <!-- css -->
         <style>
+            body {
+                margin: 5px; /* TODO */
+            }
+
             .button-success,
             .button-error,
             .button-warning,
@@ -54,12 +52,21 @@
         </style>
     </head>
     <body>
-        <textarea
-            id="editor"
-            style="width: 400px; height: 200px"
-            rows="5"
-            cols="40"
-        ></textarea>
+        <h1>c64emu</h1>
+        <p>this site is work in progress</p>
+
+        <h2>Assembler</h2>
+
+        <div
+            style="border-style: solid; border-color: black; border-width: 1px"
+        >
+            <textarea
+                id="editor"
+                style="width: 400px; height: 200px"
+                rows="5"
+                cols="40"
+            ></textarea>
+        </div>
 
         <!--
         <div class="pure-g">
@@ -69,12 +76,18 @@
         </div>
         -->
 
-        <div>
+        <div style="margin-top: 2px">
             <button
                 class="button-success pure-button"
                 onclick="c64emuGitHubIo.assemble();"
             >
-                Assemble!
+                Assemble
+            </button>
+            <button
+                class="button-success pure-button"
+                onclick="alert('unimplemented');"
+            >
+                Run
             </button>
         </div>
 
@@ -86,6 +99,22 @@
         >
             <pre><span id="asm-output"></span></pre>
         </div>
+
+        <h2>Emulator</h2>
+
+        <canvas
+            id="c64monitor_canvas"
+            width="400"
+            height="280"
+            style="width: 400px"
+        >
+        </canvas>
+        <br />
+
+        &copy; 2022 by Andreas Schwenk,
+        <a href="https://www.arts-and-sciences.com"
+            >https://www.arts-and-sciences.com</a
+        >
 
         <!-- canvas for emulator: width and height cannot be changed.
              Use style for stretching -->

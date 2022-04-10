@@ -7,5 +7,5 @@ esbuild.buildSync({
     target: 'es2020',
     entryPoints: ['src/index.ts'],
     bundle: true,
-    outfile: 'dist/c64emu.github.io.min.js',
+    outfile: 'js/c64emu.github.io.min.js',
 });
