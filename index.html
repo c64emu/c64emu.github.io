@@ -1,1 +1,106 @@
-<html><body>test</body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>C64 Emulator</title>
+        <!-- disable cache (for debugging purposes) -->
+        <meta
+            http-equiv="Cache-Control"
+            content="no-cache, no-store, must-revalidate"
+        />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <!-- charset, viewport -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <!-- css -->
+        <link rel="stylesheet" href="node_modules/purecss/build/pure-min.css" />
+        <link
+            rel="stylesheet"
+            href="node_modules/purecss/build/grids-responsive-min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="node_modules/codemirror/lib/codemirror.css"
+        />
+        <!-- include js -->
+        <script src="dist/c64emu.github.io.min.js?version=1?>"></script>
+
+        <!-- css -->
+        <style>
+            .button-success,
+            .button-error,
+            .button-warning,
+            .button-secondary {
+                color: white;
+                border-radius: 4px;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            }
+            .button-success {
+                background: rgb(28, 184, 65);
+            }
+            .button-error {
+                background: rgb(202, 60, 60);
+            }
+            .button-warning {
+                background: rgb(223, 117, 20);
+            }
+            .button-secondary {
+                background: rgb(66, 184, 221);
+            }
+        </style>
+    </head>
+    <body>
+        <textarea
+            id="editor"
+            style="width: 400px; height: 200px"
+            rows="5"
+            cols="40"
+        ></textarea>
+
+        <!--
+        <div class="pure-g">
+            <div class="pure-u-1-3"><p>Thirds</p></div>
+            <div class="pure-u-1-3"><p>Thirds</p></div>
+            <div class="pure-u-1-3"><p>Thirds</p></div>
+        </div>
+        -->
+
+        <div>
+            <button
+                class="button-success pure-button"
+                onclick="c64emuGitHubIo.assemble();"
+            >
+                Assemble!
+            </button>
+        </div>
+
+        <div
+            style="
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 10pt;
+            "
+        >
+            <pre><span id="asm-output"></span></pre>
+        </div>
+
+        <!-- canvas for emulator: width and height cannot be changed.
+             Use style for stretching -->
+        <!--<canvas
+            id="c64monitor_canvas"
+            width="400"
+            height="280"
+            style="width: 400px"
+        >
+        </canvas>-->
+
+        <script>
+            c64emuGitHubIo.init();
+            //c64emu.init(document.getElementById('c64monitor_canvas'));
+            //c64emu.render();
+        </script>
+    </body>
+</html>

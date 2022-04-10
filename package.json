@@ -1,0 +1,42 @@
+{
+    "name": "c64emu.github.io",
+    "version": "0.0.1",
+    "description": "C64 emulator website",
+    "main": "src/index.js",
+    "scripts": {
+        "build": "tsc -noEmit && node ./build.js",
+        "webserver": "php -S localhost:8000"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/c64emu/c64emu.github.io.git"
+    },
+    "keywords": [
+        "c64",
+        "emulator"
+    ],
+    "author": "Andreas Schwenk <contact@compiler-construction.com> (https://arts-and-sciences.com/)",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/c64emu/c64emu.github.io/issues"
+    },
+    "homepage": "https://github.com/c64emu.github.io/c64emu#readme",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.0.0",
+        "c64asm": "^0.0.2",
+        "codemirror": "^5.65.2",
+        "purecss": "^2.1.0"
+    },
+    "devDependencies": {
+        "@types/codemirror": "^5.60.5",
+        "@typescript-eslint/eslint-plugin": "^5.11.0",
+        "@typescript-eslint/parser": "^5.11.0",
+        "axios": "^0.25.0",
+        "core-js": "^3.21.0",
+        "esbuild": "^0.14.21",
+        "eslint": "^8.9.0",
+        "prettier": "^2.5.1",
+        "ts-node": "^10.5.0",
+        "typescript": "^4.5.5"
+    }
+}

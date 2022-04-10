@@ -1,0 +1,18 @@
+{
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.rulers": [80],
+    "cSpell.words": [
+        "Andreas",
+        "clike",
+        "codemirror",
+        "esbuild",
+        "fontawesome",
+        "fortawesome",
+        "outfile",
+        "purecss",
+        "Schwenk"
+    ]
+}
