@@ -27,7 +27,7 @@
         <!-- css -->
         <style>
             body {
-                margin: 5px;
+                /*margin: 5px;*/
                 font-family: monospace;
             }
 
@@ -45,11 +45,11 @@
             h2 {
                 font-size: 16pt;
                 line-height: 0.4em;
-                margin-top: 28px;
+                margin-top: 20px;
             }
             a {
-                color: blue;
-                text-decoration: none;
+                color: black;
+                text-decoration: underline;
             }
 
             .breakpoints {
@@ -91,15 +91,31 @@
         </style>
     </head>
     <body>
-        <h1>C64EMU</h1>
-        <p>
-            This site is work in progress. GitHub:
-            <a href="https://github.com/c64emu">https://github.com/c64emu</a>
-        </p>
+        <div
+            style="
+                width: calc(100%-4px);
+                background-color: rgb(31, 28, 28);
+                color: white;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                padding-left: 5px;
+                padding-right: 5px;
+            "
+        >
+            <h1>C64EMU</h1>
+            <p>
+                This site is work in progress. GitHub:
+                <a href="https://github.com/c64emu" style="color: white"
+                    >https://github.com/c64emu</a
+                >
+            </p>
+        </div>
+
+        <br />
 
         <div class="pure-g">
             <div class="pure-u-1-2 l-box">
-                <h2>ASSEMBLER</h2>
+                <!--<h2>ASSEMBLER</h2>-->
 
                 <div style="margin-bottom: 2px">
                     <div class="pure-menu pure-menu-horizontal">
@@ -109,18 +125,38 @@
                                 class="pure-menu-item pure-menu-selected"
                             >
                                 <a
-                                    onclick="code();"
+                                    onclick="viewCode();"
                                     class="pure-menu-link"
+                                    title="Assembly Code"
                                     style="cursor: pointer"
-                                    >Assembly Code</a
+                                    >ASM</a
                                 >
                             </li>
                             <li id="menu-output" class="pure-menu-item">
                                 <a
-                                    onclick="output();"
+                                    onclick="viewOutput();"
+                                    class="pure-menu-link"
+                                    title="Machine Code"
+                                    style="cursor: pointer"
+                                    >MC</a
+                                >
+                            </li>
+                            <li id="menu-output" class="pure-menu-item">
+                                <a
+                                    onclick="viewSpriteEditor();"
+                                    class="pure-menu-link"
+                                    title="Sprite Editor"
+                                    style="cursor: pointer"
+                                    >Sprites</a
+                                >
+                            </li>
+                            <li id="menu-output" class="pure-menu-item">
+                                <a
+                                    onclick="alert('unimplemented :-)');"
+                                    title="Character Editor"
                                     class="pure-menu-link"
                                     style="cursor: pointer"
-                                    >Machine Code</a
+                                    >Characters</a
                                 >
                             </li>
                         </ul>
@@ -157,7 +193,7 @@
                 </div>
             </div>
             <div class="pure-u-1-2 l-box">
-                <h2>EMULATOR</h2>
+                <!--<h2>EMULATOR</h2>-->
                 <div style="margin-bottom: 8px">
                     <button
                         class="button-dark pure-button"
@@ -230,13 +266,13 @@
                 >
                 </canvas>
 
-                <p id="registers"></p>
+                <p id="registers" style="font-family: monospace">&nbsp;</p>
             </div>
         </div>
 
         <br />
 
-        &copy; 2022 by Andreas Schwenk,
+        &nbsp;&copy; 2022 by Andreas Schwenk,
         <a href="https://www.arts-and-sciences.com"
             >https://www.arts-and-sciences.com</a
         >
@@ -244,7 +280,7 @@
         <script>
             c64emuGitHubIo.init();
 
-            function code() {
+            function viewCode() {
                 document.getElementById('editor-container').style.display =
                     'block';
                 document.getElementById('asm-output-container').style.display =
@@ -257,7 +293,7 @@
                     .classList.remove('pure-menu-selected');
             }
 
-            function output() {
+            function viewOutput() {
                 document.getElementById('editor-container').style.display =
                     'none';
                 document.getElementById('asm-output-container').style.display =
@@ -268,6 +304,10 @@
                 document
                     .getElementById('menu-output')
                     .classList.add('pure-menu-selected');
+            }
+
+            function viewSpriteEditor() {
+                alert('unimplemented :-)');
             }
         </script>
     </body>
