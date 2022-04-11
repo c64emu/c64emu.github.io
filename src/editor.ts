@@ -3,10 +3,13 @@ import 'codemirror/addon/mode/simple';
 import 'codemirror/addon/selection/active-line';
 import 'codemirror/addon/selection/mark-selection';
 import 'codemirror/addon/mode/overlay';
+import 'codemirror/addon/scroll/simplescrollbars';
 // esbuild requires 'codemirror' import AFTER modes and addons
 import * as CodeMirror from 'codemirror';
 
 export let editor: CodeMirror.EditorFromTextArea = null;
+
+const breakpointLines = new Set<number>();
 
 export function getText(): string {
     return editor.getValue();
@@ -46,6 +49,7 @@ export function initCodeMirror(): void {
             styleActiveLine: {
                 nonEmpty: true,
             },
+            gutters: ['CodeMirror-linenumbers', 'breakpoints'],
             extraKeys: {
                 'Ctrl-S': function () {
                     //saveDocument();
@@ -54,8 +58,19 @@ export function initCodeMirror(): void {
                     //saveDocument();
                 },
             },
+            scrollbarStyle: 'simple',
         },
     );
+    editor.on('gutterClick', function (cm, lineNo) {
+        const info = cm.lineInfo(lineNo);
+        if (info.gutterMarkers) breakpointLines.delete(lineNo + 1);
+        else breakpointLines.add(lineNo + 1);
+        cm.setGutterMarker(
+            lineNo,
+            'breakpoints',
+            info.gutterMarkers ? null : makeMarker(),
+        );
+    });
 
     editor.setSize(null, '100%');
 
@@ -67,11 +82,18 @@ next
     lda msg,x
     sta $0400,x
     inx
-    cpx #$13
+    cpx #$0D
     bne next
     jmp *
 msg
     .screen "HELLO, WORLD!"
 `;
     editor.setValue(prog);
+}
+
+function makeMarker() {
+    const marker = document.createElement('div');
+    marker.style.color = '#822';
+    marker.innerHTML = '&#9679;';
+    return marker;
 }

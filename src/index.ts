@@ -31,7 +31,7 @@ export function assemble(): boolean {
     }
 }
 
-export function run(): boolean {
+export function load(): boolean {
     if (assembleResult == null || assembleResult.error) {
         // TODO
         alert('!!!!!');

@@ -20,14 +20,40 @@
         <link rel="stylesheet" href="css/pure-min.css" />
         <link rel="stylesheet" href="css/grids-responsive-min.css" />
         <link rel="stylesheet" href="css/codemirror.css" />
+        <link rel="stylesheet" href="css/simplescrollbars.css" />
         <!-- include js -->
-        <script src="js/c64emu.github.io.min.js?version=1?>"></script>
+        <script src="js/c64emu.github.io.min.js?version=2>"></script>
 
         <!-- css -->
         <style>
             body {
-                margin: 5px; /* TODO */
+                margin: 5px;
+                font-family: monospace;
             }
+
+            h1 {
+                font-size: 24pt;
+                line-height: 0.7em;
+            }
+            h2 {
+                font-size: 16pt;
+                line-height: 0.4em;
+                margin-top: 28px;
+            }
+            a {
+                color: blue;
+                text-decoration: none;
+            }
+
+            .breakpoints {
+                width: 0.8em;
+            }
+            .breakpoint {
+                color: #822;
+            }
+            /*.CodeMirror {
+                border: 1px solid #aaa;
+            }*/
 
             .button-success,
             .button-error,
@@ -36,6 +62,10 @@
                 color: white;
                 border-radius: 4px;
                 text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                padding-left: 6px;
+                padding-right: 6px;
+                padding-top: 4px;
+                padding-bottom: 2px;
             }
             .button-success {
                 background: rgb(28, 184, 65);
@@ -52,20 +82,25 @@
         </style>
     </head>
     <body>
-        <h1>c64emu</h1>
-        <p>this site is work in progress</p>
+        <h1>C64EMU</h1>
+        <p>
+            This site is work in progress. GitHub:
+            <a href="https://github.com/c64emu">https://github.com/c64emu</a>
+        </p>
 
-        <h2>Assembler</h2>
+        <h2>ASSEMBLER</h2>
+
+        <small>Click on line numbers to set breakpoints.</small>
 
         <div
-            style="border-style: solid; border-color: black; border-width: 1px"
+            style="
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                height: 200px;
+            "
         >
-            <textarea
-                id="editor"
-                style="width: 400px; height: 200px"
-                rows="5"
-                cols="40"
-            ></textarea>
+            <textarea id="editor" style="" rows="5" cols="40"></textarea>
         </div>
 
         <!--
@@ -85,9 +120,9 @@
             </button>
             <button
                 class="button-success pure-button"
-                onclick="c64emuGitHubIo.run();"
+                onclick="c64emuGitHubIo.load();"
             >
-                Run
+                Load
             </button>
         </div>
 
@@ -100,13 +135,28 @@
             <pre><span id="asm-output"></span></pre>
         </div>
 
-        <h2>Emulator</h2>
+        <h2>EMULATOR</h2>
         <div style="margin-top: 2px">
+            <button
+                class="button-success pure-button"
+                onclick="c64emuGitHubIo.continue();"
+            >
+                <img src="img/fontawesome/play.svg" style="height: 16px" />
+            </button>
+            <button
+                class="button-success pure-button"
+                onclick="c64emuGitHubIo.pause();"
+            >
+                <img src="img/fontawesome/pause.svg" style="height: 16px" />
+            </button>
             <button
                 class="button-success pure-button"
                 onclick="c64emuGitHubIo.step();"
             >
-                step
+                <img
+                    src="img/fontawesome/forward-step.svg"
+                    style="height: 16px"
+                />
             </button>
         </div>
         <p id="registers">pc=?</p>
