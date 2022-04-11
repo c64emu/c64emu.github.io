@@ -13,6 +13,7 @@
         "fortawesome",
         "outfile",
         "purecss",
-        "Schwenk"
+        "Schwenk",
+        "simplescrollbars"
     ]
 }
