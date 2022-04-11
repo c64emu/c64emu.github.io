@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/codemirror.css" />
         <link rel="stylesheet" href="css/simplescrollbars.css" />
         <!-- include js -->
-        <script src="js/c64emu.github.io.min.js?version=3>"></script>
+        <script src="js/c64emu.github.io.min.js?version=4>"></script>
 
         <!-- css -->
         <style>
@@ -62,6 +62,7 @@
             .button-success,
             .button-error,
             .button-warning,
+            .button-dark,
             .button-secondary {
                 color: white;
                 border-radius: 4px;
@@ -80,6 +81,9 @@
             }
             .button-warning {
                 background: rgb(223, 117, 20);
+            }
+            .button-dark {
+                background: rgb(55, 55, 55);
             }
             .button-secondary {
                 background: rgb(66, 184, 221);
@@ -156,7 +160,7 @@
                 <h2>EMULATOR</h2>
                 <div style="margin-bottom: 8px">
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         title="reset"
                         onclick="c64emuGitHubIo.reset();"
                     >
@@ -167,19 +171,19 @@
                         />&nbsp;&nbsp;
                     </button>
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         onclick="c64emuGitHubIo.assemble();"
                     >
                         Assemble
                     </button>
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         onclick="c64emuGitHubIo.load();"
                     >
                         Load
                     </button>
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         title="continue"
                         onclick="c64emuGitHubIo.continue();"
                     >
@@ -190,7 +194,7 @@
                         />&nbsp;&nbsp;
                     </button>
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         title="pause"
                         onclick="c64emuGitHubIo.pause();"
                     >
@@ -201,7 +205,7 @@
                         />&nbsp;&nbsp;
                     </button>
                     <button
-                        class="button-success pure-button"
+                        class="button-dark pure-button"
                         title="step"
                         onclick="c64emuGitHubIo.step();"
                     >
@@ -226,7 +230,7 @@
                 >
                 </canvas>
 
-                <p id="registers">pc=?</p>
+                <p id="registers"></p>
             </div>
         </div>
 

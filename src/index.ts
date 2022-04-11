@@ -61,23 +61,23 @@ export function step(): void {
 function updateRegisters(): void {
     const registers = c64emu.getRegisters();
     const registersString =
-        'pc=' +
-        registers['pc'].toString(16).toUpperCase() +
+        'PC=' +
+        registers['pc'].toString(16).toUpperCase().padStart(4, '0') +
         ' (' +
         registers['pc'] +
         ')' +
-        ', a=' +
-        registers['a'].toString(16).toUpperCase() +
+        ', A=' +
+        registers['a'].toString(16).toUpperCase().padStart(2, '0') +
         ' (' +
         registers['a'] +
         ')' +
-        ', x=' +
-        registers['x'].toString(16).toUpperCase() +
+        ', X=' +
+        registers['x'].toString(16).toUpperCase().padStart(2, '0') +
         ' (' +
         registers['x'] +
         ')' +
-        ', y=' +
-        registers['y'].toString(16).toUpperCase() +
+        ', Y=' +
+        registers['y'].toString(16).toUpperCase().padStart(2, '0') +
         ' (' +
         registers['y'] +
         ')';
