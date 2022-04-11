@@ -3,26 +3,31 @@ import * as c64asm from 'c64asm/src';
 import * as c64emu from 'c64emu/src';
 
 let assembleResult: c64asm.AssembleResult = null;
+let monitor: HTMLCanvasElement = null;
 
 export function init(): void {
-    const monitor = <HTMLCanvasElement>(
-        document.getElementById('c64monitor_canvas')
-    );
+    monitor = <HTMLCanvasElement>document.getElementById('c64monitor_canvas');
     editor.initCodeMirror();
+    c64emu.init(monitor);
+    c64emu.render();
+}
+
+export function reset(): void {
     c64emu.init(monitor);
     c64emu.render();
 }
 
 export function assemble(): boolean {
     const outputDiv = document.getElementById('asm-output');
+    const errorDiv = document.getElementById('asm-errors');
     const src = editor.getText();
     assembleResult = c64asm.assemble6502(src);
     if (assembleResult.error) {
-        outputDiv.innerHTML =
-            'assemble failed. Error:' +
-            assembleResult.errorString.replace(/\n/g, '<br/>');
+        errorDiv.innerHTML =
+            'Error:' + assembleResult.errorString.replace(/\n/g, '<br/>');
         return false;
     } else {
+        errorDiv.innerHTML = 'ok';
         outputDiv.innerHTML = assembleResult.stringifiedCode.replace(
             /\n/g,
             '<br/>',

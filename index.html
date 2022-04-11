@@ -31,6 +31,13 @@
                 font-family: monospace;
             }
 
+            .pure-g > div {
+                box-sizing: border-box;
+            }
+            .l-box {
+                padding: 2px;
+            }
+
             h1 {
                 font-size: 24pt;
                 line-height: 0.7em;
@@ -51,9 +58,6 @@
             .breakpoint {
                 color: #822;
             }
-            /*.CodeMirror {
-                border: 1px solid #aaa;
-            }*/
 
             .button-success,
             .button-error,
@@ -66,6 +70,7 @@
                 padding-right: 6px;
                 padding-top: 4px;
                 padding-bottom: 2px;
+                height: 28px;
             }
             .button-success {
                 background: rgb(28, 184, 65);
@@ -88,85 +93,143 @@
             <a href="https://github.com/c64emu">https://github.com/c64emu</a>
         </p>
 
-        <h2>ASSEMBLER</h2>
-
-        <small>Click on line numbers to set breakpoints.</small>
-
-        <div
-            style="
-                border-style: solid;
-                border-color: black;
-                border-width: 1px;
-                height: 200px;
-            "
-        >
-            <textarea id="editor" style="" rows="5" cols="40"></textarea>
-        </div>
-
-        <!--
         <div class="pure-g">
-            <div class="pure-u-1-3"><p>Thirds</p></div>
-            <div class="pure-u-1-3"><p>Thirds</p></div>
-            <div class="pure-u-1-3"><p>Thirds</p></div>
-        </div>
-        -->
+            <div class="pure-u-1-2 l-box">
+                <h2>ASSEMBLER</h2>
 
-        <div style="margin-top: 2px">
-            <button
-                class="button-success pure-button"
-                onclick="c64emuGitHubIo.assemble();"
-            >
-                Assemble
-            </button>
-            <button
-                class="button-success pure-button"
-                onclick="c64emuGitHubIo.load();"
-            >
-                Load
-            </button>
+                <div style="margin-bottom: 2px">
+                    <div class="pure-menu pure-menu-horizontal">
+                        <ul class="pure-menu-list">
+                            <li
+                                id="menu-code"
+                                class="pure-menu-item pure-menu-selected"
+                            >
+                                <a
+                                    onclick="code();"
+                                    class="pure-menu-link"
+                                    style="cursor: pointer"
+                                    >Assembly Code</a
+                                >
+                            </li>
+                            <li id="menu-output" class="pure-menu-item">
+                                <a
+                                    onclick="output();"
+                                    class="pure-menu-link"
+                                    style="cursor: pointer"
+                                    >Machine Code</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="editor-container">
+                    <div
+                        style="
+                            border-style: solid;
+                            border-color: black;
+                            border-width: 1px;
+                            height: 300px;
+                        "
+                    >
+                        <textarea id="editor" rows="5" cols="40"></textarea>
+                    </div>
+                    <small>Click on line numbers to set breakpoints.</small>
+                    <pre><span id="asm-errors"></span></pre>
+                </div>
+
+                <div
+                    id="asm-output-container"
+                    style="
+                        border-style: solid;
+                        border-color: black;
+                        border-width: 1px;
+                        font-family: 'Courier New', Courier, monospace;
+                        font-size: 10pt;
+                        display: none;
+                    "
+                >
+                    <pre><span id="asm-output"><br/><br/></span></pre>
+                </div>
+            </div>
+            <div class="pure-u-1-2 l-box">
+                <h2>EMULATOR</h2>
+                <div style="margin-bottom: 8px">
+                    <button
+                        class="button-success pure-button"
+                        title="reset"
+                        onclick="c64emuGitHubIo.reset();"
+                    >
+                        &nbsp;
+                        <img
+                            src="img/fontawesome/arrow-rotate-left.svg"
+                            style="height: 16px"
+                        />&nbsp;&nbsp;
+                    </button>
+                    <button
+                        class="button-success pure-button"
+                        onclick="c64emuGitHubIo.assemble();"
+                    >
+                        Assemble
+                    </button>
+                    <button
+                        class="button-success pure-button"
+                        onclick="c64emuGitHubIo.load();"
+                    >
+                        Load
+                    </button>
+                    <button
+                        class="button-success pure-button"
+                        title="continue"
+                        onclick="c64emuGitHubIo.continue();"
+                    >
+                        &nbsp;
+                        <img
+                            src="img/fontawesome/play.svg"
+                            style="height: 16px"
+                        />&nbsp;&nbsp;
+                    </button>
+                    <button
+                        class="button-success pure-button"
+                        title="pause"
+                        onclick="c64emuGitHubIo.pause();"
+                    >
+                        &nbsp;
+                        <img
+                            src="img/fontawesome/pause.svg"
+                            style="height: 16px"
+                        />&nbsp;&nbsp;
+                    </button>
+                    <button
+                        class="button-success pure-button"
+                        title="step"
+                        onclick="c64emuGitHubIo.step();"
+                    >
+                        &nbsp;
+                        <img
+                            src="img/fontawesome/forward-step.svg"
+                            style="height: 16px"
+                        />&nbsp;&nbsp;
+                    </button>
+                </div>
+
+                <canvas
+                    id="c64monitor_canvas"
+                    width="400"
+                    height="280"
+                    style="
+                        width: 80%;
+                        border-style: solid;
+                        border-color: black;
+                        border-width: 1px;
+                    "
+                >
+                </canvas>
+
+                <p id="registers">pc=?</p>
+            </div>
         </div>
 
-        <div
-            style="
-                font-family: 'Courier New', Courier, monospace;
-                font-size: 10pt;
-            "
-        >
-            <pre><span id="asm-output"></span></pre>
-        </div>
-
-        <h2>EMULATOR</h2>
-        <div style="margin-top: 2px">
-            <button
-                class="button-success pure-button"
-                onclick="c64emuGitHubIo.continue();"
-            >
-                <img src="img/fontawesome/play.svg" style="height: 16px" />
-            </button>
-            <button
-                class="button-success pure-button"
-                onclick="c64emuGitHubIo.pause();"
-            >
-                <img src="img/fontawesome/pause.svg" style="height: 16px" />
-            </button>
-            <button
-                class="button-success pure-button"
-                onclick="c64emuGitHubIo.step();"
-            >
-                <img
-                    src="img/fontawesome/forward-step.svg"
-                    style="height: 16px"
-                />
-            </button>
-        </div>
-        <p id="registers">pc=?</p>
-        <canvas
-            id="c64monitor_canvas"
-            width="400"
-            height="280"
-            style="width: 400px"
-        >
-        </canvas>
         <br />
 
         &copy; 2022 by Andreas Schwenk,
@@ -174,20 +237,34 @@
             >https://www.arts-and-sciences.com</a
         >
 
-        <!-- canvas for emulator: width and height cannot be changed.
-             Use style for stretching -->
-        <!--<canvas
-            id="c64monitor_canvas"
-            width="400"
-            height="280"
-            style="width: 400px"
-        >
-        </canvas>-->
-
         <script>
             c64emuGitHubIo.init();
-            //c64emu.init(document.getElementById('c64monitor_canvas'));
-            //c64emu.render();
+
+            function code() {
+                document.getElementById('editor-container').style.display =
+                    'block';
+                document.getElementById('asm-output-container').style.display =
+                    'none';
+                document
+                    .getElementById('menu-code')
+                    .classList.add('pure-menu-selected');
+                document
+                    .getElementById('menu-output')
+                    .classList.remove('pure-menu-selected');
+            }
+
+            function output() {
+                document.getElementById('editor-container').style.display =
+                    'none';
+                document.getElementById('asm-output-container').style.display =
+                    'block';
+                document
+                    .getElementById('menu-code')
+                    .classList.remove('pure-menu-selected');
+                document
+                    .getElementById('menu-output')
+                    .classList.add('pure-menu-selected');
+            }
         </script>
     </body>
 </html>
