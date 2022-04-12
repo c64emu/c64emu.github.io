@@ -125,7 +125,7 @@
                                 class="pure-menu-item pure-menu-selected"
                             >
                                 <a
-                                    onclick="viewCode();"
+                                    onclick="openTab(0);"
                                     class="pure-menu-link"
                                     title="Assembly Code"
                                     style="cursor: pointer"
@@ -134,7 +134,7 @@
                             </li>
                             <li id="menu-output" class="pure-menu-item">
                                 <a
-                                    onclick="viewOutput();"
+                                    onclick="openTab(1);"
                                     class="pure-menu-link"
                                     title="Machine Code"
                                     style="cursor: pointer"
@@ -143,7 +143,7 @@
                             </li>
                             <li id="menu-output" class="pure-menu-item">
                                 <a
-                                    onclick="viewSpriteEditor();"
+                                    onclick="openTab(2);"
                                     class="pure-menu-link"
                                     title="Sprite Editor"
                                     style="cursor: pointer"
@@ -152,7 +152,7 @@
                             </li>
                             <li id="menu-output" class="pure-menu-item">
                                 <a
-                                    onclick="alert('unimplemented :-)');"
+                                    onclick="openTab(3);"
                                     title="Character Editor"
                                     class="pure-menu-link"
                                     style="cursor: pointer"
@@ -281,34 +281,26 @@
         <script>
             c64emuGitHubIo.init();
 
-            function viewCode() {
-                document.getElementById('editor-container').style.display =
-                    'block';
-                document.getElementById('asm-output-container').style.display =
-                    'none';
-                document
-                    .getElementById('menu-code')
-                    .classList.add('pure-menu-selected');
-                document
-                    .getElementById('menu-output')
-                    .classList.remove('pure-menu-selected');
-            }
+            let tabHeaders = [
+                document.getElementById('menu-code'),
+                document.getElementById('menu-output'),
+            ];
+            let tabs = [
+                document.getElementById('editor-container'),
+                document.getElementById('asm-output-container'),
+            ];
 
-            function viewOutput() {
-                document.getElementById('editor-container').style.display =
-                    'none';
-                document.getElementById('asm-output-container').style.display =
-                    'block';
-                document
-                    .getElementById('menu-code')
-                    .classList.remove('pure-menu-selected');
-                document
-                    .getElementById('menu-output')
-                    .classList.add('pure-menu-selected');
-            }
-
-            function viewSpriteEditor() {
-                alert('unimplemented :-)');
+            function openTab(idx) {
+                if (idx >= tabs.length) {
+                    alert('unimplemented :-)');
+                    return;
+                }
+                for (let i = 0; i < tabs.length; i++) {
+                    if (i == idx)
+                        tabHeaders[i].classList.add('pure-menu-selected');
+                    else tabHeaders[i].classList.remove('pure-menu-selected');
+                    tabs[i].style.display = i == idx ? 'block' : 'none';
+                }
             }
         </script>
     </body>
