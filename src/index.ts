@@ -13,6 +13,7 @@ export function init(): void {
 }
 
 export function reset(): void {
+    document.getElementById('errors').innerHTML = '';
     c64emu.init(monitor);
     c64emu.render();
 }
@@ -53,7 +54,11 @@ export function load(): boolean {
 
 export function step(): void {
     if (assembleResult == null) return;
-    c64emu.step();
+    if (c64emu.step() == false) {
+        const err = c64emu.getErrorLog().replace(/\n/g, '<br/>');
+        document.getElementById('errors').innerHTML =
+            '<span style="color:red;">' + err + '</span>';
+    }
     updateRegisters();
     c64emu.render();
 }
