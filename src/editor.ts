@@ -1,3 +1,9 @@
+/******************************************************************************
+ * C64 Emulator -- for the web                                                *
+ * (c) 2022 by Andreas Schwenk, License: GPLv3                                *
+ * mailto:contact@compiler-construction.com                                   *
+ *****************************************************************************/
+
 //import 'codemirror/mode/clike/clike';
 import 'codemirror/addon/mode/simple';
 import 'codemirror/addon/selection/active-line';

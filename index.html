@@ -141,7 +141,7 @@
                                     >MC</a
                                 >
                             </li>
-                            <li id="menu-output" class="pure-menu-item">
+                            <li id="menu-sprites" class="pure-menu-item">
                                 <a
                                     onclick="openTab(2);"
                                     class="pure-menu-link"
@@ -150,7 +150,7 @@
                                     >Sprites</a
                                 >
                             </li>
-                            <li id="menu-output" class="pure-menu-item">
+                            <li id="menu-characters" class="pure-menu-item">
                                 <a
                                     onclick="openTab(3);"
                                     title="Character Editor"
@@ -176,6 +176,21 @@
                     </div>
                     <small>Click on line numbers to set breakpoints.</small>
                     <pre><span id="asm-errors"></span></pre>
+                </div>
+
+                <div id="sprite-editor-container">
+                    <canvas
+                        id="sprite-editor-canvas"
+                        width="192"
+                        height="168"
+                        style="
+                            width: 192px;
+                            border-style: solid;
+                            border-color: black;
+                            border-width: 1px;
+                        "
+                    ></canvas>
+                    <pre><small><span id="sprite-editor-asm"></span></small></pre>
                 </div>
 
                 <div
@@ -274,9 +289,9 @@
         <br />
 
         &nbsp;&copy; 2022 by Andreas Schwenk,
-        <a href="https://www.arts-and-sciences.com"
-            >https://www.arts-and-sciences.com</a
-        >
+        <a href="https://www.arts-and-sciences.com">
+            https://www.arts-and-sciences.com
+        </a>
 
         <script>
             c64emuGitHubIo.init();
@@ -284,10 +299,12 @@
             let tabHeaders = [
                 document.getElementById('menu-code'),
                 document.getElementById('menu-output'),
+                document.getElementById('menu-sprites'),
             ];
             let tabs = [
                 document.getElementById('editor-container'),
                 document.getElementById('asm-output-container'),
+                document.getElementById('sprite-editor-container'),
             ];
 
             function openTab(idx) {
@@ -302,6 +319,8 @@
                     tabs[i].style.display = i == idx ? 'block' : 'none';
                 }
             }
+
+            openTab(0);
         </script>
     </body>
 </html>

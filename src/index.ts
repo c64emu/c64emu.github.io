@@ -1,15 +1,26 @@
+/******************************************************************************
+ * C64 Emulator -- for the web                                                *
+ * (c) 2022 by Andreas Schwenk, License: GPLv3                                *
+ * mailto:contact@compiler-construction.com                                   *
+ *****************************************************************************/
+
 import * as editor from './editor';
+import * as sprites from './sprites';
 import * as c64asm from 'c64asm/src';
 import * as c64emu from 'c64emu/src';
 
 let assembleResult: c64asm.AssembleResult = null;
 let monitor: HTMLCanvasElement = null;
+let spriteEditor: sprites.SpriteEditor = null;
 
 export function init(): void {
     monitor = <HTMLCanvasElement>document.getElementById('c64monitor_canvas');
     editor.initCodeMirror();
     c64emu.init(monitor);
     c64emu.render();
+
+    spriteEditor = new sprites.SpriteEditor();
+    spriteEditor.renderSprite();
 }
 
 export function reset(): void {
